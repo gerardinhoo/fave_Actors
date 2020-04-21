@@ -19,6 +19,14 @@ import ActorItem from "./ActorItem";
      }
    }
 
+   const deleteItem = (id) => {
+     setItems(prevItems => {
+       return prevItems.filter((item, i) => {
+         return i !== id
+       })
+     })   
+   }
+
    const clickHandler = () => {
      setItems((prevItems) => {
        return ([...prevItems, inputText]);
@@ -37,11 +45,11 @@ import ActorItem from "./ActorItem";
         onKeyPress={onKeyPressHandler}
         value={inputText}
         />
-        <a className="waves-effect waves-light btn-small" onClick={clickHandler}>Add Actor</a>
+        <button className="waves-effect waves-light btn-small" onClick={clickHandler}>Add Actor</button>
      <ul>
        {
          items.map((item, i) => {
-           return <ActorItem key={i} item={item} />
+           return <ActorItem key={i} id={i} item={item} deleteItem={deleteItem} />
          })
        }
      </ul>
